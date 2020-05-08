@@ -1,5 +1,5 @@
-export default function signIn() {
-  return new Promise(resolve => {
+export function signIn() {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
         token: 'o1li240sçkdoymab48kanf04ps2n4nalfçksp5dcsbo91lalopanwudnsidf',
