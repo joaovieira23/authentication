@@ -27,12 +27,14 @@ export const AuthProvider = ({ children }) => {
 
       // Para verificar o loading
       // await new Promise(resolve => setTimeout(resolve, 2000));
-
       if (storagedUser && storagedToken) {
         api.defaults.headers['Authorization'] = `Bearer ${storagedToken}`;
         setUser(JSON.parse(storagedUser));
         setLoading(false);
-      }
+      } else if (!storagedUser && !storagedToken) {
+        setLoading(false);
+     }
+      
     }
 
     loadStoragedData();
