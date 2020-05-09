@@ -24,8 +24,13 @@ export const AuthProvider = ({ children }) => {
     setUser(response.user);
   }
   
+
+  function signOut() {
+    setUser(null);
+  }
+
   return ( 
-    <AuthContext.Provider value={{ signed: !!user, signIn, user}}>
+    <AuthContext.Provider value={{ signed: !!user, signIn, user, signOut}}>
       {children}
     </AuthContext.Provider>
   );
