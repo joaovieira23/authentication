@@ -23,7 +23,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <AuthProvider>
-        < Routes />
+        <Routes/>
       </AuthProvider>
     </NavigationContainer>
   );
