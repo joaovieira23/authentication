@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { AsyncStorage } from 'react-native';
 import * as auth from '../services/auth';
+import api from '../services/api';
 
 //TYPESCRIPT
 // interface AuthContextData {
@@ -28,6 +29,7 @@ export const AuthProvider = ({ children }) => {
       // await new Promise(resolve => setTimeout(resolve, 2000));
 
       if (storagedUser && storagedToken) {
+        api.defaults.headers['Authorization'] = `Bearer ${storagedToken}`;
         setUser(JSON.parse(storagedUser));
         setLoading(false);
       }
@@ -42,6 +44,9 @@ export const AuthProvider = ({ children }) => {
     // console.log(user);
     setUser(response.user);
 
+    api.defaults.headers['Authorization'] = `Bearer ${response.token}`;
+    //Toda requisição subsequente terá o header Authorization com este conteudo
+    
     await AsyncStorage.setItem('@AuthRN:user', JSON.stringify(response.user));
     await AsyncStorage.setItem('@AuthRN:token', response.token);
   }
