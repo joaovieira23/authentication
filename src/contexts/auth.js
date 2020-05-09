@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 import * as auth from '../services/auth';
 
 //TYPESCRIPT
@@ -15,14 +15,17 @@ import * as auth from '../services/auth';
 const AuthContext = createContext({ signed: false, user: {} }); 
 
 export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
   async function signIn() {
     const response = await auth.signIn();
 
-    console.log(response);
+    // console.log(user);
+    setUser(response.user);
   }
   
   return ( 
-    <AuthContext.Provider value={{ signed: false, signIn, user: {}}}>
+    <AuthContext.Provider value={{ signed: !!user, signIn, user}}>
       {children}
     </AuthContext.Provider>
   );

@@ -13,7 +13,7 @@ const SignIn = () => {
 
   console.log(signed);
 
-  async function handleSignIn() {
+  function handleSignIn() {
     signIn();
   };
 
